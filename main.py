@@ -10,9 +10,17 @@ import pandas as pd
 
 def grabURL():
     driver = webdriver.Chrome(ChromeDriverManager().install())
-    my_url = "https://www.apartments.com/"
+    my_url = "https://www.apartments.com/queens-ny/?bb=wvn4ot71wH89k0vqS"
     driver.get(my_url)
     #uClient = uReq(my_url)
+    
+    prices = driver.find_elements_by_xpath('//div[@class="price-range"]')
+    prices_list = []
+    for price in range(len(prices)):
+        prices_list.append(prices[price].text)
+    print(prices_list)
+    
+    '''
     try:
         response = uReq(my_url, timeout=10).read().decode('utf-8')
     except HTTPError as error:
@@ -32,5 +40,5 @@ def grabURL():
     page_soup = soup(readPage, "html.parser")
 
     print(page_soup.h1)
-
+'''
 grabURL()
