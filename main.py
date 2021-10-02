@@ -1,3 +1,4 @@
+from urllib import response
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 from socket import timeout
@@ -18,12 +19,14 @@ def grabURL():
         raise Exception('socket timed out - URL:', my_url)
     else:
         print('Access successful.')
-    readPage = uReq.read()
+    readPage = response
     #print(readPage)
-    uReq.close()
+    
 
 
     #html parsing
     page_soup = soup(readPage, "html.parser")
 
     print(page_soup.h1)
+
+grabURL()
