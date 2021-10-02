@@ -3,11 +3,15 @@ from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 from socket import timeout
 from urllib.error import HTTPError, URLError
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from webdriver_manager.chrome import ChromeDriverManager
+import pandas as pd
 
 def grabURL():
-
+    driver = webdriver.Chrome(ChromeDriverManager().install())
     my_url = "https://www.apartments.com/"
-
+    driver.get(my_url)
     #uClient = uReq(my_url)
     try:
         response = uReq(my_url, timeout=10).read().decode('utf-8')
@@ -16,7 +20,7 @@ def grabURL():
     except URLError as error:
         raise Exception('URL Error')
     except timeout:
-        raise Exception('socket timed out - URL:', my_url)
+        raise Exception('socket timed out: '+ my_url)
     else:
         print('Access successful.')
     readPage = response
