@@ -11,6 +11,14 @@ import pandas as pd
 def grabURL():
     driver = webdriver.Chrome(ChromeDriverManager().install())
     my_url = "https://www.apartments.com/queens-ny/?bb=wvn4ot71wH89k0vqS"
+    df = pd.DataFrame(columns=['prices'])
+'''
+#We can use this commented out code in order to help us find the next page
+    for pg in range(1,5):
+        page_num = str(pg) + '-' + str(pg+1) +'/'
+    url = 'https://www.apartments.com/queens-ny' + page_num
+    driver.get(url)
+    '''
     driver.get(my_url)
     #uClient = uReq(my_url)
     
