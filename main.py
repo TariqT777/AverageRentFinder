@@ -44,15 +44,24 @@ def grabURL():
     for price_range in range(len(prices_list)):
         prices_list[price_range] = prices_list[price_range][0].split(":")
 
+    print(prices_list)
+
     for price_range in range(len(prices_list)):
         for index in range(len(prices_list[0])):
             prices_list[price_range][index] = int(prices_list[price_range][index])
+
+    priceSumList = []
+    for price_range in range(len(prices_list)):
+        priceSumList.append(sum(prices_list[price_range])/len(prices_list[price_range]))
+    
+    print("avg of each apartment is:", priceSumList)
+        
 
     #prices_string = " "
    # prices_list = prices_string.join(prices_list)
 
     #prices_list = prices_list.split(",")
-    print(prices_list)
+    
     
     '''
     try:
