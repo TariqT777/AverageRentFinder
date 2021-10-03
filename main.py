@@ -55,6 +55,10 @@ def grabURL():
         priceSumList.append(sum(prices_list[price_range])/len(prices_list[price_range]))
     
     print("avg of each apartment is:", priceSumList)
+
+    totalRentAvg =  sum(priceSumList)/len(priceSumList)
+    totalRentAvg = "%.2f" % totalRentAvg
+    print("The average rent for an apartment is :","$"+totalRentAvg)
     
     
     '''
