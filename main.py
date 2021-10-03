@@ -37,8 +37,16 @@ def grabURL():
         prices_list[price_range] = prices_list[price_range].replace(" - ",":")
         prices_list[price_range] = prices_list[price_range].replace("$","")
         prices_list[price_range] = prices_list[price_range].replace(",","")
-        #I need to change these into ints, having trouble.
+    
+    prices_list.remove("Call for Rent")   #Eliminates any places that don't provide their rent on website. 
+    prices_list = [[i] for i in prices_list]
 
+    for price_range in range(len(prices_list)):
+        prices_list[price_range] = prices_list[price_range][0].split(":")
+
+    for price_range in range(len(prices_list)):
+        for index in range(len(prices_list[0])):
+            prices_list[price_range][index] = int(prices_list[price_range][index])
 
     #prices_string = " "
    # prices_list = prices_string.join(prices_list)
