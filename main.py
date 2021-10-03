@@ -34,7 +34,10 @@ def grabURL():
     print(prices_list)
     print("\n""\n")
     for price_range in range(len(prices_list)):
-        prices_list[price_range] = prices_list[price_range].replace(" - ",",")
+        prices_list[price_range] = prices_list[price_range].replace(" - ",":")
+        prices_list[price_range] = prices_list[price_range].replace("$","")
+        prices_list[price_range] = prices_list[price_range].replace(",","")
+        #I need to change these into ints, having trouble.
 
 
     #prices_string = " "
