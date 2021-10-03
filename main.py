@@ -3,6 +3,7 @@ from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 from socket import timeout
 from urllib.error import HTTPError, URLError
+from numpy import character
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
@@ -11,14 +12,18 @@ import pandas as pd
 def grabURL():
     driver = webdriver.Chrome(ChromeDriverManager().install())
     my_url = "https://www.apartments.com/queens-ny/?bb=wvn4ot71wH89k0vqS"
-    df = pd.DataFrame(columns=['prices'])
-'''
-#We can use this commented out code in order to help us find the next page
+    #df = pd.DataFrame(columns=['prices'])
+    
+    
+    '''
+    #We can use this commented out code in order to help us find the next page
     for pg in range(1,5):
         page_num = str(pg) + '-' + str(pg+1) +'/'
     url = 'https://www.apartments.com/queens-ny' + page_num
     driver.get(url)
     '''
+    
+    
     driver.get(my_url)
     #uClient = uReq(my_url)
     
@@ -26,6 +31,16 @@ def grabURL():
     prices_list = []
     for price in range(len(prices)):
         prices_list.append(prices[price].text)
+    print(prices_list)
+    print("\n""\n")
+    for price_range in range(len(prices_list)):
+        prices_list[price_range] = prices_list[price_range].replace(" - ",",")
+
+
+    #prices_string = " "
+   # prices_list = prices_string.join(prices_list)
+
+    #prices_list = prices_list.split(",")
     print(prices_list)
     
     '''
