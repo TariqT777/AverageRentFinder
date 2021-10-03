@@ -11,7 +11,7 @@ import pandas as pd
 
 def grabURL():
     driver = webdriver.Chrome(ChromeDriverManager().install())
-    my_url = "https://www.apartments.com/queens-ny/?bb=wvn4ot71wH89k0vqS"
+    my_url = "https://www.apartments.com/queens-ny/?bb=wvn4ot71wH89k0vqS" #URL to webscrape from
     #df = pd.DataFrame(columns=['prices'])
     
     
@@ -24,43 +24,37 @@ def grabURL():
     '''
     
     
-    driver.get(my_url)
+    driver.get(my_url) 
     #uClient = uReq(my_url)
     
-    prices = driver.find_elements_by_xpath('//div[@class="price-range"]')
+    prices = driver.find_elements_by_xpath('//div[@class="price-range"]') #Finds the section with the data that we're looking for.
     prices_list = []
-    for price in range(len(prices)):
-        prices_list.append(prices[price].text)
+    for price in range(len(prices)): #Finds all the prices on the page and stores it in a list.
+        prices_list.append(prices[price].text) 
     print(prices_list)
     print("\n""\n")
-    for price_range in range(len(prices_list)):
+    for price_range in range(len(prices_list)): #Since the prices are displayed as a string on Apartments.com, the following lines get rid of any unnecessary charachters (like the commas).
         prices_list[price_range] = prices_list[price_range].replace(" - ",":")
         prices_list[price_range] = prices_list[price_range].replace("$","")
         prices_list[price_range] = prices_list[price_range].replace(",","")
     
     prices_list.remove("Call for Rent")   #Eliminates any places that don't provide their rent on website. 
-    prices_list = [[i] for i in prices_list]
+    prices_list = [[i] for i in prices_list] #Creating a nested list to make it easier to change the parsed strings into int types.
 
-    for price_range in range(len(prices_list)):
-        prices_list[price_range] = prices_list[price_range][0].split(":")
+    for price_range in range(len(prices_list)): #Split the max and min prices of each apartments into separate entity based off of the ':' delimiter we created earlier.
+        prices_list[price_range] = prices_list[price_range][0].split(":") 
 
     print(prices_list)
 
-    for price_range in range(len(prices_list)):
+    for price_range in range(len(prices_list)): #Finally turn each number into an int type.
         for index in range(len(prices_list[0])):
-            prices_list[price_range][index] = int(prices_list[price_range][index])
+            prices_list[price_range][index] = int(prices_list[price_range][index]) 
 
     priceSumList = []
-    for price_range in range(len(prices_list)):
+    for price_range in range(len(prices_list)): #Get the average of each apartment's price and then put them into a new list for separate use.
         priceSumList.append(sum(prices_list[price_range])/len(prices_list[price_range]))
     
     print("avg of each apartment is:", priceSumList)
-        
-
-    #prices_string = " "
-   # prices_list = prices_string.join(prices_list)
-
-    #prices_list = prices_list.split(",")
     
     
     '''
