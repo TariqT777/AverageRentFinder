@@ -1,13 +1,25 @@
 from urllib import response
 from urllib.request import urlopen as uReq
-from bs4 import BeautifulSoup as soup
+#from bs4 import BeautifulSoup as soup
 from socket import timeout
 from urllib.error import HTTPError, URLError
-from numpy import character
+#from numpy import character
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return 'Hello World!'
+
+if __name__ == '__main__':
+    app.run()
+
+
 
 def grabURL():
     driver = webdriver.Chrome(ChromeDriverManager().install())
