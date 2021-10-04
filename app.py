@@ -16,7 +16,7 @@ from flask import Flask, render_template
 
 def grabURL():
     driver = webdriver.Chrome(ChromeDriverManager().install())
-    my_url = "https://www.apartments.com/queens-ny/?bb=wvn4ot71wH89k0vqS" #URL to webscrape from
+    my_url = "https://www.apartments.com/queens-ny/" #URL to webscrape from
     #df = pd.DataFrame(columns=['prices'])
     
     
