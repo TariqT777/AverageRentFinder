@@ -8,7 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
-from flask import Flask, render_template
+from flask import Flask, render_template,request
 #from werkzeug.fixers import CGIRootFix
 
 
@@ -95,6 +95,13 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return render_template('index.html',totalRentAvg = grabURL())
+
+@app.route('/', methods=['POST'])
+def my_form_post():
+    text = request.form['text']
+    processed_text = text.upper()
+    print("chicken", processed_text)
+    return "chicken",processed_text
 
 if __name__ == '__main__':
     app.run(debug = True)
