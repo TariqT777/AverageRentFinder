@@ -103,7 +103,7 @@ def cityState():
         flash('Location requested for {}, in {}'.format(
             form.city.data, form.state.data))
         return redirect('/')
-    return render_template('index.html', title="Average Rent", form=form)
+    return render_template('/index.html', title="Average Rent", form=form)
 
 @app.route('/')
 def index():

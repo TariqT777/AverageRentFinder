@@ -14,6 +14,7 @@
         <p>
             {{ form.city.label }}<br>
             {{ form.city(size=32) }}<br>
+            {{ form.csrf_token }}
             {% for error in form.city.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
