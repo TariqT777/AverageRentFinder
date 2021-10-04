@@ -9,6 +9,9 @@ from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
 from flask import Flask, render_template,request
+from appForms import cityStateForm
+
+from appForms import cityStateForm
 #from werkzeug.fixers import CGIRootFix
 
 
@@ -92,16 +95,25 @@ def grabURL():
 
 app = Flask(__name__)
 
+app.config['SECRET_KEY'] = 'any secret string'
+
+@app.route('/')
+def cityState():
+    form = cityStateForm()
+    return render_template('index.html', title='Input desired location (City, State(abbreviated)', form=form)
+
 @app.route('/')
 def index():
     return render_template('index.html',totalRentAvg = grabURL())
 
-@app.route('/', methods=['POST'])
+
+'''
+@app.route('/', methods=['POST']) #This grabs the input from the form on the index.html page.
 def my_form_post():
     text = request.form['text']
     processed_text = text.upper()
-    print("chicken", processed_text)
-    return "chicken",processed_text
-
+    print("test", processed_text)
+    #return "test",processed_text
+'''
 if __name__ == '__main__':
     app.run(debug = True)
