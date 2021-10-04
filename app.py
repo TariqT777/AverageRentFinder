@@ -12,15 +12,6 @@ from flask import Flask, render_template
 
 
 
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-if __name__ == '__main__':
-    app.run(debug = True)
-
 
 
 def grabURL():
@@ -73,6 +64,8 @@ def grabURL():
     totalRentAvg =  sum(priceSumList)/len(priceSumList)
     totalRentAvg = "%.2f" % totalRentAvg
     print("The average rent for an apartment is :","$"+totalRentAvg)
+
+    return totalRentAvg
     
     
     '''
@@ -96,4 +89,13 @@ def grabURL():
 
     print(page_soup.h1)
 '''
-grabURL()
+
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html',totalRentAvg = grabURL())
+
+if __name__ == '__main__':
+    app.run(debug = True)
