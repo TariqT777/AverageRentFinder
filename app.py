@@ -8,10 +8,9 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
-from flask import Flask, render_template,request
+from flask import Flask, render_template,request,flash,redirect
 from appForms import cityStateForm
 
-from appForms import cityStateForm
 #from werkzeug.fixers import CGIRootFix
 
 
@@ -97,10 +96,14 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'any secret string'
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def cityState():
     form = cityStateForm()
-    return render_template('index.html', title='Input desired location (City, State(abbreviated)', form=form)
+    if form.validate_on_submit():
+        flash('Location requested for {}, in {}'.format(
+            form.city.data, form.state.data))
+        return redirect('/')
+    return render_template('index.html', title="Average Rent", form=form)
 
 @app.route('/')
 def index():
