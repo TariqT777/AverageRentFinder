@@ -8,9 +8,8 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
-from flask import Flask, render_template,url_for
-
-
+from flask import Flask, render_template
+#from werkzeug.fixers import CGIRootFix
 
 
 
