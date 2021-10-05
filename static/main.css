@@ -2,5 +2,19 @@ body{
   background-color: lightblue;
   font-family: base-font-family;
   color: #222;
+
+  margin: 0;
 }
 
+h1{
+  font: 40px bold Georgia,Tahoma,serif;
+}
+
+.container{
+  width: 500px;
+  margin:auto;
+}
+
+.Form{
+  background-color: pink;
+}

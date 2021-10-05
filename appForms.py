@@ -5,5 +5,5 @@ from wtforms.validators import InputRequired, DataRequired
 
 class cityStateForm(FlaskForm):
     city = StringField('City', validators=[InputRequired()])
-    state = StringField('State', validators=[InputRequired()])
+    state = StringField('State (abbreviated)', validators=[InputRequired()])
     submit = SubmitField('Find Avg')
