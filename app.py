@@ -13,11 +13,10 @@ from appForms import cityStateForm
 
 #from werkzeug.fixers import CGIRootFix
 
-
-
-def grabURL():
+    
+def grabURL(my_url):
     driver = webdriver.Chrome(ChromeDriverManager().install())
-    my_url = "https://www.apartments.com/queens-ny/" #URL to webscrape from
+    #URL to webscrape from
     #df = pd.DataFrame(columns=['prices'])
     
     
@@ -43,8 +42,8 @@ def grabURL():
         prices_list[price_range] = prices_list[price_range].replace(" - ",":")
         prices_list[price_range] = prices_list[price_range].replace("$","")
         prices_list[price_range] = prices_list[price_range].replace(",","")
-    
-    prices_list.remove("Call for Rent")   #Eliminates any places that don't provide their rent on website. 
+    if "Call for Rent" in prices_list:
+        prices_list.remove("Call for Rent")   #Eliminates any places that don't provide their rent on website. 
     prices_list = [[i] for i in prices_list] #Creating a nested list to make it easier to change the parsed strings into int types.
 
     for price_range in range(len(prices_list)): #Split the max and min prices of each apartments into separate entity based off of the ':' delimiter we created earlier.
@@ -53,7 +52,7 @@ def grabURL():
     print(prices_list)
 
     for price_range in range(len(prices_list)): #Finally turn each number into an int type.
-        for index in range(len(prices_list[0])):
+        for index in range(len(prices_list[price_range])):
             prices_list[price_range][index] = int(prices_list[price_range][index]) 
 
     priceSumList = []
@@ -66,7 +65,30 @@ def grabURL():
     totalRentAvg = "%.2f" % totalRentAvg
     print("The average rent for an apartment is :","$"+totalRentAvg)
 
-    return totalRentAvg
+    return "$" + totalRentAvg
+
+app = Flask(__name__)
+
+app.config['SECRET_KEY'] = 'any secret string'
+
+@app.route('/', methods=['GET', 'POST']) #Grabs the input from the form and displays output if valid.
+def cityState():
+    form = cityStateForm()
+    if form.validate_on_submit():
+        addCity = form.city.data 
+        addState = form.state.data
+        my_url = "https://www.apartments.com/" + addCity + "-" + addState + "/"
+        flash(grabURL(my_url))
+        #'Location requested for {}, in {}'.format(
+         #   form.city.data, form.state.data))
+        return redirect('/')
+    return render_template('/index.html', title="Average Rent", form=form)
+
+#my_url = "https://www.apartments.com/" + addCity + "-" + addState + "/"
+#print(my_url)
+
+if __name__ == '__main__':
+    app.run(debug = True)
     
     
     '''
@@ -92,22 +114,15 @@ def grabURL():
 '''
 
 
-app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'any secret string'
 
-@app.route('/', methods=['GET', 'POST'])
-def cityState():
-    form = cityStateForm()
-    if form.validate_on_submit():
-        flash('Location requested for {}, in {}'.format(
-            form.city.data, form.state.data))
-        return redirect('/')
-    return render_template('/index.html', title="Average Rent", form=form)
+'''
 
+Not using this rn, but may need it later.
 @app.route('/')
 def index():
     return render_template('index.html',totalRentAvg = grabURL())
+'''
 
 
 '''
@@ -118,5 +133,3 @@ def my_form_post():
     print("test", processed_text)
     #return "test",processed_text
 '''
-if __name__ == '__main__':
-    app.run(debug = True)
