@@ -43,7 +43,12 @@ def grabURL(my_url):
         prices_list[price_range] = prices_list[price_range].replace("$","")
         prices_list[price_range] = prices_list[price_range].replace(",","")
     if "Call for Rent" in prices_list:
-        prices_list.remove("Call for Rent")   #Eliminates any places that don't provide their rent on website. 
+        i = 0
+        while i < len(prices_list):
+            if prices_list[i] == "Call for Rent":
+                prices_list.remove("Call for Rent")   #Eliminates any places that don't provide their rent on website. 
+            else:
+                i += 1
     prices_list = [[i] for i in prices_list] #Creating a nested list to make it easier to change the parsed strings into int types.
 
     for price_range in range(len(prices_list)): #Split the max and min prices of each apartments into separate entity based off of the ':' delimiter we created earlier.
@@ -65,7 +70,7 @@ def grabURL(my_url):
     totalRentAvg = "%.2f" % totalRentAvg
     print("The average rent for an apartment is :","$"+totalRentAvg)
 
-    return "$" + totalRentAvg
+    return "$" + totalRentAvg + "/Month"
 
 app = Flask(__name__)
 
