@@ -36,6 +36,8 @@ def grabURL(my_url,city,state):
     prices_list = []
     for price in range(len(prices)): #Finds all the prices on the page and stores it in a list.
         prices_list.append(prices[price].text) 
+    if len(prices_list) == 0:
+        return "N/A"
     print(prices_list)
     print("\n""\n")
     for price_range in range(len(prices_list)): #Since the prices are displayed as a string on Apartments.com, the following lines get rid of any unnecessary charachters (like the commas).
@@ -83,10 +85,13 @@ def cityState():
         addCity = form.city.data 
         addState = form.state.data
         my_url = "https://www.apartments.com/" + addCity + "-" + addState + "/"
-        #flash('{},{}'.format(
-           #form.city.data, form.state.data)) #'{} {} {}'.format(firstname, lastname, cellphone)
-        flash('{},{} is {}'.format(addCity,addState,grabURL(my_url,addCity,addState))) #Saves the results of the avg here.
-        return redirect('/')
+        result = grabURL(my_url,addCity,addState)
+        if result == "N/A":
+            flash("Location does not exist! (Check spelling)")
+            return redirect('/')
+        else:
+            flash('The average rent for an apartment in {},{} is {}'.format(addCity,addState,result)) #Saves the results of the avg here.
+            return redirect('/')
     return render_template('/index.html', title="Average Rent", form=form)
 
 #my_url = "https://www.apartments.com/" + addCity + "-" + addState + "/"
