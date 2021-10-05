@@ -10,6 +10,10 @@ h1{
   font: 40px bold Georgia,Tahoma,serif;
 }
 
+h2{
+  font: 28px bold Georgia,Tahoma,serif;
+}
+
 .container{
   width: 80%;
   margin:auto;
@@ -17,8 +21,8 @@ h1{
 
 .Form{
   background-color: pink;
-  border: 5px yellow solid;
-  padding: 0px;
+  border: 5px white solid;
+  padding: none;
 }
 
 .Form p{
@@ -26,6 +30,24 @@ h1{
   padding: 3px;
 }
 
-.Button{
-  background-color: green;
+#submit{
+  background-color: pink; /* Green */
+  border: 5px white solid;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  outline:0;
+  border-radius: 12px;
+  transition-duration: 0.4s;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
+
+#submit:hover{
+  background-color: white;
+  color: black;
+  border: 5px pink solid;
+}
+
