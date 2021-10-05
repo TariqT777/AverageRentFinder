@@ -14,7 +14,7 @@ from appForms import cityStateForm
 #from werkzeug.fixers import CGIRootFix
 
     
-def grabURL(my_url):
+def grabURL(my_url,city,state):
     driver = webdriver.Chrome(ChromeDriverManager().install())
     #URL to webscrape from
     #df = pd.DataFrame(columns=['prices'])
@@ -70,7 +70,7 @@ def grabURL(my_url):
     totalRentAvg = "%.2f" % totalRentAvg
     print("The average rent for an apartment is :","$"+totalRentAvg)
 
-    return "$" + totalRentAvg + "/Month"
+    return  "$" + totalRentAvg + "/Month"
 
 app = Flask(__name__)
 
@@ -83,9 +83,9 @@ def cityState():
         addCity = form.city.data 
         addState = form.state.data
         my_url = "https://www.apartments.com/" + addCity + "-" + addState + "/"
-        flash(grabURL(my_url))
-        #'Location requested for {}, in {}'.format(
-         #   form.city.data, form.state.data))
+        #flash('{},{}'.format(
+           #form.city.data, form.state.data)) #'{} {} {}'.format(firstname, lastname, cellphone)
+        flash('{},{} is {}'.format(addCity,addState,grabURL(my_url,addCity,addState))) #Saves the results of the avg here.
         return redirect('/')
     return render_template('/index.html', title="Average Rent", form=form)
 
@@ -95,28 +95,7 @@ def cityState():
 if __name__ == '__main__':
     app.run(debug = True)
     
-    
-    '''
-    try:
-        response = uReq(my_url, timeout=10).read().decode('utf-8')
-    except HTTPError as error:
-        raise Exception('Data not retrieved because URL: ', error, my_url)
-    except URLError as error:
-        raise Exception('URL Error')
-    except timeout:
-        raise Exception('socket timed out: '+ my_url)
-    else:
-        print('Access successful.')
-    readPage = response
-    #print(readPage)
-    
-
-
-    #html parsing
-    page_soup = soup(readPage, "html.parser")
-
-    print(page_soup.h1)
-'''
+   
 
 
 
@@ -129,12 +108,3 @@ def index():
     return render_template('index.html',totalRentAvg = grabURL())
 '''
 
-
-'''
-@app.route('/', methods=['POST']) #This grabs the input from the form on the index.html page.
-def my_form_post():
-    text = request.form['text']
-    processed_text = text.upper()
-    print("test", processed_text)
-    #return "test",processed_text
-'''
