@@ -4,29 +4,29 @@
     
     
 
-</head>
+
 <body>
 
     {% block content %}
 
-    <h1>Input desired location (City, State(abbreviated))</h1>
+    <center><h1>Input desired location (City, State(abbreviated))</h1></center>
     <form action="" method="post" novalidate>
-        <p>
+        <center><p>
             {{ form.city.label }}<br>
             {{ form.city(size=32) }}<br>
             {{ form.csrf_token }}
             {% for error in form.city.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-        </p>
-        <p>
+        </p></center>
+        <center><p>
             {{ form.state.label }}<br>
             {{ form.state(size=2) }}<br>
             {% for error in form.state.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
+        </p></center>
+        <center><p>{{ form.submit() }}</p></center>
     </form>
 
 
@@ -41,7 +41,7 @@
 
     
       
-    <h3>The average rent for an apartment is : {{messages}}</h3>
+    <center><h3>The average rent for an apartment is : {{messages}}</h3></center>
 
     {% endif %}
     {% endwith %}
