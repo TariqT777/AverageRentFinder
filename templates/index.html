@@ -14,7 +14,7 @@
     <div class="Form">
     <form action="" method="post" novalidate>
         <center><p>
-            {{ form.city.label }}<br>
+            {{ form.city.label }}</p>
             {{ form.city(size=32) }}<br>
             {{ form.csrf_token }}
             {% for error in form.city.errors %}
@@ -22,7 +22,7 @@
             {% endfor %}
         </p></center>
         <center><p>
-            {{ form.state.label }}<br>
+            {{ form.state.label }}</p>
             {{ form.state(size=2) }}<br>
             {% for error in form.state.errors %}
             <span style="color: red;">[{{ error }}]</span>
@@ -30,8 +30,11 @@
         </div>
     </div>
         </p></center>
-        <center><p>{{ form.submit() }}</p></center>
+
+    <div class = "Button">
+        <center><button type="button">{{ form.submit() }}</button></center>
     </form>
+    </div>
     
 
 

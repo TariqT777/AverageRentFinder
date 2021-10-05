@@ -11,10 +11,21 @@ h1{
 }
 
 .container{
-  width: 500px;
+  width: 80%;
   margin:auto;
 }
 
 .Form{
   background-color: pink;
+  border: 5px yellow solid;
+  padding: 0px;
+}
+
+.Form p{
+  font: 20px Tahoma, serif;
+  padding: 3px;
+}
+
+.Button{
+  background-color: green;
 }
