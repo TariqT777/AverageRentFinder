@@ -19,7 +19,7 @@ from pyvirtualdisplay import Display
     
 def grabURL(my_url,city,state):
 
-    '''
+    
     CHROME_PATH = '/usr/bin/google-chrome'
     CHROMEDRIVER_PATH = '/usr/bin/chromedriver'
     WINDOW_SIZE = "1920,1080"
@@ -28,7 +28,7 @@ def grabURL(my_url,city,state):
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--window-size=%s" % WINDOW_SIZE)
     chrome_options.binary_location = CHROME_PATH
-    '''
+    
 
     driver = webdriver.Chrome(ChromeDriverManager().install())
     #URL to webscrape from
@@ -88,7 +88,7 @@ def grabURL(my_url,city,state):
     totalRentAvg = "%.2f" % totalRentAvg
     print("The average rent for an apartment is :","$"+totalRentAvg)
 
-    #driver.close()
+    driver.close()
 
     return  "$" + totalRentAvg + "/Month"
 
