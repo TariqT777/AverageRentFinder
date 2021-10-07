@@ -1,3 +1,5 @@
+#Localhost:5000
+
 from urllib import response
 from urllib.request import urlopen as uReq
 #from bs4 import BeautifulSoup as soup
@@ -7,14 +9,27 @@ from urllib.error import HTTPError, URLError
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
 import pandas as pd
 from flask import Flask, render_template,request,flash,redirect
 from appForms import cityStateForm
-
+from pyvirtualdisplay import Display
 #from werkzeug.fixers import CGIRootFix
 
     
 def grabURL(my_url,city,state):
+
+    '''
+    CHROME_PATH = '/usr/bin/google-chrome'
+    CHROMEDRIVER_PATH = '/usr/bin/chromedriver'
+    WINDOW_SIZE = "1920,1080"
+
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--window-size=%s" % WINDOW_SIZE)
+    chrome_options.binary_location = CHROME_PATH
+    '''
+
     driver = webdriver.Chrome(ChromeDriverManager().install())
     #URL to webscrape from
     #df = pd.DataFrame(columns=['prices'])
@@ -32,10 +47,11 @@ def grabURL(my_url,city,state):
     driver.get(my_url) 
     #uClient = uReq(my_url)
     
-    prices = driver.find_elements_by_xpath('//div[@class="price-range"]') #Finds the section with the data that we're looking for.
+    prices = driver.find_elements_by_xpath('//p[@class="property-pricing"]') #Finds the section with the data that we're looking for.
     prices_list = []
     for price in range(len(prices)): #Finds all the prices on the page and stores it in a list.
         prices_list.append(prices[price].text) 
+        print(price)
     if len(prices_list) == 0:
         return "N/A"
     print(prices_list)
@@ -71,6 +87,8 @@ def grabURL(my_url,city,state):
     totalRentAvg =  sum(priceSumList)/len(priceSumList)
     totalRentAvg = "%.2f" % totalRentAvg
     print("The average rent for an apartment is :","$"+totalRentAvg)
+
+    #driver.close()
 
     return  "$" + totalRentAvg + "/Month"
 
