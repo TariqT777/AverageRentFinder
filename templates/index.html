@@ -19,14 +19,14 @@
             {{ form.city(size=32) }}<br>
             {{ form.csrf_token }}
             {% for error in form.city.errors %}
-            <span style="color: red;">[{{ error }}]</span>
+            <span style="color: red;">[{{ error }}]</span> <!--Displays text saying to input some text into the form bar if the user tries to submit without a form section filled out. -->
             {% endfor %}
         </p></center>
         <center><p>
             {{ form.state.label }}</p>
             {{ form.state(size=2) }}<br>
             {% for error in form.state.errors %}
-            <span style="color: red;">[{{ error }}]</span>
+            <span style="color: red;">[{{ error }}]</span>  <!--Displays text saying to input some text into the form bar if the user tries to submit without a form section filled out. -->
             {% endfor %}
         </div>
     </div>
