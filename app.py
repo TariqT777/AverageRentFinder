@@ -19,7 +19,10 @@ from pyvirtualdisplay import Display
     
 def grabURL(my_url,city,state):
 
+    '''
+    The next few lines keep selenium's pop-up window in the background, insted of in front of the user's screen.
     
+    '''    
     CHROME_PATH = '/usr/bin/google-chrome'
     CHROMEDRIVER_PATH = '/usr/bin/chromedriver'
     WINDOW_SIZE = "1920,1080"
